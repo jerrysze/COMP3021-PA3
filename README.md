@@ -142,7 +142,7 @@ Based on the `exeutionMode`, you also need to implement the following three meth
 #### Task 3: Interleaved XML Import and Query
 
 In tasks 1 and 2, the XML import and query are handled separately. In task 3, you will receive a list of commands containing both XML import and query. Note that for each AST, its loading commands are not guaranteed to be issued earlier than its query.
-You should correctly schedule these commands to prevent AST not found exceptions. For instance, for the following example command list, command 3 should not be executed before command 1. Besides, the order of queries should be consistent to that in given commands.
+You should correctly schedule these commands to prevent AST not found exceptions. For instance, for the following example command list, command 3 should be executed before command 1. Besides, the order of queries should be consistent to that in given commands.
 
 More importantly, if there are no corresponding AST loading commands for a specific query, the query should be skipped.
 
