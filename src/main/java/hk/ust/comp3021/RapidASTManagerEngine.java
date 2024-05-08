@@ -28,9 +28,22 @@ public class RapidASTManagerEngine {
      * Hint1: you can use thread pool {@link ExecutorService} to implement the method
      * Hint2: you can use {@link ParserWorker#run()} 
      */
-    
+
     public void processXMLParsingPool(String xmlDirPath, List<String> xmlIDs, int numThread) {
-        
+        ExecutorService executorService = Executors.newFixedThreadPool(numThread);
+
+        for (String xmlID : xmlIDs) {
+            ParserWorker parserWorker = new ParserWorker(xmlID, xmlDirPath);
+            executorService.submit(parserWorker);
+        }
+
+        executorService.shutdown();
+
+        try {
+            executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     
     /**

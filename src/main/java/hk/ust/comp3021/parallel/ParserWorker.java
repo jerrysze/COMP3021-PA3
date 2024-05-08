@@ -32,6 +32,13 @@ public class ParserWorker implements Runnable {
      */
     @Override
     public void run() {
+        ASTParser astParser = new ASTParser();
+        String xmlFilePath = xmlDirPath + "/" + xmlID + ".xml";
 
+        ASTModule astModule = astParser.parse(xmlFilePath);
+
+        synchronized (id2ASTModules) {
+            id2ASTModules.put(xmlID, astModule);
+        }
     }
 }
