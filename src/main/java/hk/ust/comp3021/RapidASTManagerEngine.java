@@ -30,20 +30,7 @@ public class RapidASTManagerEngine {
      */
 
     public void processXMLParsingPool(String xmlDirPath, List<String> xmlIDs, int numThread) {
-        ExecutorService executorService = Executors.newFixedThreadPool(numThread);
 
-        for (String xmlID : xmlIDs) {
-            ParserWorker parserWorker = new ParserWorker(xmlID, xmlDirPath);
-            executorService.submit(parserWorker);
-        }
-
-        executorService.shutdown();
-
-        try {
-            executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
     
     /**
